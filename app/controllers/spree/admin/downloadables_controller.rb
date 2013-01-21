@@ -4,6 +4,8 @@ module Spree
 		  resource_controller
 		  before_filter :load_data
 
+		  respond_to :html
+
 		  new_action.response do |wants|
 			wants.html {render :action => :new, :layout => false}
 		  end
