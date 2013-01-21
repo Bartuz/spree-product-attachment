@@ -1,6 +1,7 @@
 module Spree
 	module Admin
 		class DownloadablesController < Spree::Admin::BaseController
+		  resource_controller
 		  before_filter :load_data
 
 		  new_action.response do |wants|
@@ -47,12 +48,18 @@ module Spree
 		  private
 
 		  def load_data
-            @product = Product.where(:permalink => params[:product_id]).first
-            @variants = @product.variants.collect do |variant|
-              [variant.options_text, variant.id]
-            end
-            @variants.insert(0, [I18n.t(:all), @product.master.id])
-          end
+		    @product = Product.find_by_permalink(params[:product_id])
+		    @variants = @product.variants.collect do |variant|
+		      [variant.options_text, variant.id ]
+		    end
+
+		    @variants.insert(0, "All")
+
+		    # @download_limits = @product.variants.collect do |variant|
+		    # variant.downloadables.empty? ? ("\"#{variant.id}\": \'\'") : ("\"#{variant.id}\": #{variant.downloadables.first.download_limit}")
+		    # end
+
+		  end
 		end
 	end
 end
