@@ -2,6 +2,7 @@ module Spree
 	module Admin
 		class DownloadablesController < Spree::Admin::BaseController
 			resource_controller
+		  before_filter :load_data
 
 		  respond_to :html
 
@@ -45,6 +46,16 @@ module Spree
 			  render :text => ""
 			end
 		  end
+
+		  private
+
+		  def load_data
+            @product = Spree::Product.find_by_permalink(params[:product_id])
+            @variants = @product.variants.collect do |variant|
+              [variant.options_text, variant.id]
+            end
+            @variants.insert(0, [I18n.t(:all), @product.master.id])
+          end
 		end
 	end
 end
