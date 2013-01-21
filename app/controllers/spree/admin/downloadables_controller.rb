@@ -50,7 +50,7 @@ module Spree
 		  private
 
 		  def load_data
-            @product = Spree::Product.where(:permalink => params[:product_id]).first!
+            @product = Spree::Product.find_by_permalink(:permalink => params[:product_id])
             @variants = @product.variants.collect do |variant|
               [variant.options_text, variant.id]
             end
