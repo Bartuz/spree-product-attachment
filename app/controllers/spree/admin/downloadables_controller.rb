@@ -1,6 +1,7 @@
 module Spree
 	module Admin
 		class DownloadablesController < Spree::Admin::BaseController
+			helper 'spree/products'
 			resource_controller
 		  before_filter :load_data
 
@@ -51,6 +52,7 @@ module Spree
 
 		  def load_data
             @product = Spree::Product.find_by_permalink(params[:product_id])
+            raise "Product is #{params[:product_id]}. Product count #{@product.count}"
             @variants = @product.variants.collect do |variant|
               [variant.options_text, variant.id]
             end
