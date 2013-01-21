@@ -1,6 +1,6 @@
 module Spree
 	module Admin
-		class DownloadablesController < BaseController
+		class DownloadablesController < Spree::Admin::BaseController
 		  before_filter :load_data
 
 		  new_action.response do |wants|
