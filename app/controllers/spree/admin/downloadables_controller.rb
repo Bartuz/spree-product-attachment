@@ -1,7 +1,6 @@
 module Spree
 	module Admin
 		class DownloadablesController < Spree::Admin::BaseController
-		  resource_controller
 		  before_filter :load_data
 
 		  respond_to :html
