@@ -12,7 +12,7 @@ module Spree
 		  end
 
 		  create.response do |wants|
-			wants.html {redirect_to admin_product_downloadables_url(@product)}
+			wants.html {redirect_to admin_product_downloadables_path(@product)}
 		  end
 		  
 		  create.failure.wants.html do
@@ -20,7 +20,7 @@ module Spree
 		  end
 
 		  update.response do |wants|
-			wants.html {redirect_to admin_product_downloadables_url(@product)}
+			wants.html {redirect_to admin_product_downloadables_path(@product)}
 		  end
 
 		  create.before do
